@@ -1,5 +1,4 @@
-const mainScreen = require ('../ScreenObjects/MainScreenObject');
-
+const mainScreen = require("../ScreenObjects/MainScreenObject");
 
 describe("Fer share Test suite", () => {
   // Set global variables
@@ -11,12 +10,9 @@ describe("Fer share Test suite", () => {
     calculateBtn,
     totalPrice,
     pricePerPerson;
-    
 
   beforeEach(async () => {
-
-    await driver.activateApp('com.FerShare.fershare');
-
+    await browser.activateApp("com.FerShare.fershare");
 
     totalKmInput = await $(
       `//*[@resource-id="com.FerShare.fershare:id/editTextTotalkm"]`
@@ -44,10 +40,10 @@ describe("Fer share Test suite", () => {
     );
   });
 
-    afterEach(async () => {
-      // Close the app after each test
-      await browser.closeApp();
-    });
+  afterEach(async () => {
+    // Close the app after each test
+    await browser.closeApp();
+  });
 
   it("Calculate fuel consume", async () => {
     await totalKmInput.setValue(420);
@@ -70,7 +66,7 @@ describe("Fer share Test suite", () => {
 
     await mainScreen.calculateBtn.click();
 
-    await expect(mainScreen.totalPrice).toHaveText("1691.96");
-    await expect(mainScreen.pricePerPerson).toHaveText("563.99");
+    await mainScreen.checkTotalPriceValue("1691.96");
+    await mainScreen.checkpricePerPerson("563.99");
   });
 });
